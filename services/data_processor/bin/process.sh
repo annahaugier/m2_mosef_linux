@@ -2,4 +2,4 @@
 
 cd ../app/
 
-python3 processor.py "$CLEANED_FILE"
+python3 processor.py "$CLEANED_FILE" "$PROCESSED_FILE"

@@ -19,22 +19,15 @@ types_a_appliquer = {
 }
 crimes_par_region = pd.read_csv(input_file, sep=';', decimal=',', dtype = types_a_appliquer)
 
-print(crimes_par_region.columns)
 # drop la colonne LOG (ie le nombre de logements issu du recensement de la commune (LOG) pour l’année précisée par une variable millésime (millLOG))
 crimes_par_region = crimes_par_region.drop('LOG', axis=1)
 
 # nettoyage
 # corriger année
-crimes_par_region['annee'] = crimes_par_region['annee']+2000
+crimes_par_region['annee'] = crimes_par_region['annee'] + 2000
 # supprimer les éventuels doubons purs
-crimes_par_region = crimes_par_region.drop_duplicates()
+crimes_par_region = crimes_par_region.drop_duplicates().dropna()
 # nom des colonnes
-nettoyer_nom_des_colonnes(crimes_par_region)
+crimes_par_region = nettoyer_nom_des_colonnes(crimes_par_region)
 
-# sauvegarder le DataFrame au format csv
 crimes_par_region.to_csv(output_file)
-
-print(crimes_par_region.isna().sum())
-print(crimes_par_region.shape)
-print(crimes_par_region.head())
-print(crimes_par_region.dtypes)
