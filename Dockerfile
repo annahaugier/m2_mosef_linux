@@ -1,7 +1,7 @@
-FROM ubuntu:20.04
+FROM ubuntu:latest
 
 RUN mkdir -p /app
-RUN apt update && apt-get install -y curl python3 python3-pip
+RUN apt update && apt-get install -y curl python3 python3-pip file
 
 WORKDIR /app
 COPY . .
