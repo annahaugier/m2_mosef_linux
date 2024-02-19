@@ -4,8 +4,22 @@ import dash_leaflet as dl
 from dash import html, dcc
 
 classes = [1, 2, 3, 4, 5, 6, 7, 8]
-colorscale = ['#FFEDA0', '#FED976', '#FEB24C', '#FD8D3C', '#FC4E2A', '#E31A1C', '#BD0026', '#800026']
-ctg = ["{}%".format(cls, classes[i + 1]) for i, cls in enumerate(classes[:-1])] + ['{}%'.format(classes[-1])]
+colorscale = [
+    '#FFEDA0',
+    '#FED976',
+    '#FEB24C',
+    '#FD8D3C',
+    '#FC4E2A',
+    '#E31A1C',
+    '#BD0026',
+    '#800026'
+]
+ctg = [
+    "{}%".format(cls)
+    for i, cls in enumerate(classes[:-1])
+] + [
+    '{}%'.format(classes[-1])
+]
 style = {
     'weight': 2,
     'opacity': 1,
@@ -30,13 +44,27 @@ style_handle = assign("""function(feature, context){
 def get_info(feature=None, json_data=None, year=2016):
     header = [html.H4('Statistiques du crime en ' + str(year))]
     if not feature:
-        return header + [html.P('Survolez un département pour afficher les statistiques')]
-    
+        return header + [html.P(
+            'Survolez un département pour afficher les statistiques'
+        )]
+
     crimes = []
-    for i, (key, faits) in enumerate(json_data[str(year)][feature['properties']['code']]['crimes'].items()):
+    for i, (key, faits) in enumerate(
+        json_data[str(year)] \
+            [feature['properties']['code']] \
+            ['crimes'] \
+            .items()
+    ):
         crimes += [faits, ' ', key, html.Br()]
-    
-    return header + [html.B(feature['properties']['code'] + '. ' + feature['properties']['nom']), html.Br()] + [html.Pre(children=crimes)]
+
+    return header + [
+        html.B(
+            feature['properties']['code'] + \
+                '. ' + \
+                feature['properties']['nom']
+        ),
+        html.Br()
+    ] + [html.Pre(children=crimes)]
 
 def get_hideout(data, year='2016'):
     return {
@@ -83,7 +111,7 @@ def get_layers(data):
         }
     )
 
-    
+
 
     annees = [int(i) for i in data]
     slider = dcc.Slider(

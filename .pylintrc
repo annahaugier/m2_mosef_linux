@@ -1,0 +1,4 @@
+[FORMAT]
+# 1 seul prérequis:
+# 70 caracteres max par ligne
+max-line-length=70
