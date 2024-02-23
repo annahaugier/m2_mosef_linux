@@ -3,7 +3,7 @@
 import sys
 import pandas as pd
 
-from .utils import nettoyer_nom_des_colonnes
+from utils import nettoyer_nom_des_colonnes
 
 if len(sys.argv) < 3:
     print('Usage: integrator.py input.csv output.csv')
